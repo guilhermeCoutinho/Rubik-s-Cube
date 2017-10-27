@@ -3,19 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RubiksBehaviour : MonoBehaviour {
-    public int moves = 20;
     public int speed = 30; // THE SPEED MUST BE A FORMAL 90 DIVISOR;
 
     Transform[] cubes;
 
     int[] clockWiseRotationMapping =     { 2, 5, 8, 1, 4, 7, 0, 3, 6 };
     int[] antiClockWiseRotationMapping = { 6, 3, 0, 7, 4, 1, 8, 5, 2 };
-
-    Stack<Vector4> rotationHistory = new Stack<Vector4>();
-    bool isScrambling = false;
-    bool isSolving = false;
-
-
+    
     void Awake ()
     {
         if (90 % speed != 0)
@@ -28,85 +22,8 @@ public class RubiksBehaviour : MonoBehaviour {
             cubes[i] = transform.GetChild(i);
         }
     }
-
-    void Start ()
-    {
-        StartCoroutine(showCase());
-    }
-
-    IEnumerator showCase()
-    {
-        while (true)
-        {
-            yield return StartCoroutine(ScrambleAnimation(moves));
-            yield return new WaitForSeconds(.3f);
-            yield return StartCoroutine(PopStack());
-            yield return new WaitForSeconds(.3f);
-        }
-    }
-
-    public void Scramble(int moveCount)
-    {
-        StartCoroutine(ScrambleAnimation(moveCount));
-    }
-
-    IEnumerator ScrambleAnimation(int moveCount)
-    {
-        if (isScrambling || isSolving)
-            yield break;
-        isScrambling = true;
-        while (moveCount-- > 0)
-        {
-            int randomAxis = Random.Range(0, 3);
-            int rowIndex = Random.Range(0, 3);
-            float rotation = Random.Range(0, 1) > 0.5f ? 90 : -90;
-
-            if (randomAxis == 0)
-            {
-                rotationHistory.Push(new Vector4(rotation, 0, 0, rowIndex));
-                yield return StartCoroutine(RotateAroundX(rowIndex, rotation));
-            }
-            if (randomAxis == 1)
-            {
-                rotationHistory.Push(new Vector4(0, rotation, 0, rowIndex));
-                yield return StartCoroutine(RotateAroundY(rowIndex, rotation));
-            }
-            if (randomAxis == 2)
-            {
-                rotationHistory.Push(new Vector4(0, 0, rotation, rowIndex));
-                yield return StartCoroutine(RotateAroundZ(rowIndex, rotation));
-            }
-
-        }
-        isScrambling = false;
-    }
-
-    public void Solve()
-    {
-        StartCoroutine(PopStack());
-    }
-
-    IEnumerator PopStack()
-    {
-        if (isSolving || isScrambling)
-            yield break;
-        isSolving = true;
-        while (rotationHistory.Count > 0)
-        {
-            Vector4 rotation = rotationHistory.Pop();
-            if (rotation.x != 0)
-                yield return StartCoroutine(RotateAroundX((int)rotation.w, -(int)rotation.x));
-            else if (rotation.y != 0)
-                yield return StartCoroutine(RotateAroundY((int)rotation.w, -(int)rotation.y));
-            else if (rotation.z != 0)
-                yield return StartCoroutine(RotateAroundZ((int)rotation.w, -(int)rotation.z));
-
-        }
-        isSolving = false;
-    }
-
     
-    IEnumerator RotateAroundX(int index, float targetRotation)
+    public IEnumerator RotateAroundX(int index, float targetRotation)
     {
         index *= 9;
         int rotateAmount = 0;
@@ -123,7 +40,7 @@ public class RubiksBehaviour : MonoBehaviour {
         remapXRotationCubes(index,targetRotation >0);
     }
 
-    void remapXRotationCubes(int index, bool isClockwise)
+    public void remapXRotationCubes(int index, bool isClockwise)
     {
         Transform[] subArray = new Transform[9];
         for (int i = 0; i < 9; i++)
@@ -139,7 +56,7 @@ public class RubiksBehaviour : MonoBehaviour {
         }
     }
 
-    IEnumerator RotateAroundY(int index, float targetRotation)
+    public IEnumerator RotateAroundY(int index, float targetRotation)
     {
         int rotateAmount = 0;
         float actualSpeed = targetRotation > 0 ? speed : -speed;
@@ -157,7 +74,7 @@ public class RubiksBehaviour : MonoBehaviour {
         remapYRotationCubes(index, targetRotation > 0);
     }
 
-    void remapYRotationCubes(int index, bool isClockwise)
+    public void remapYRotationCubes(int index, bool isClockwise)
     {
         Transform[] subArray = new Transform[9];
         for (int i = 0; i < 9; i++)
@@ -176,7 +93,7 @@ public class RubiksBehaviour : MonoBehaviour {
         }
     }
 
-    IEnumerator RotateAroundZ(int index, float targetRotation)
+    public IEnumerator RotateAroundZ(int index, float targetRotation)
     {
         int rotateAmount = 0;
         float actualSpeed = targetRotation > 0 ? speed : -speed;
@@ -194,7 +111,7 @@ public class RubiksBehaviour : MonoBehaviour {
         remapZRotationCubes(index, targetRotation > 0);
     }
 
-    void remapZRotationCubes(int index, bool isClockwise)
+    public void remapZRotationCubes(int index, bool isClockwise)
     {
         Transform[] subArray = new Transform[9];
         for (int i = 0; i < 9; i++)
@@ -209,5 +126,4 @@ public class RubiksBehaviour : MonoBehaviour {
             cubes[index + i*3] = subArray[i];
         }
     }
-
 }

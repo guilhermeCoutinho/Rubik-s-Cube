@@ -112,6 +112,22 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1030172694 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1028791855414950, guid: 2a59828eea982a34dbf9cd2e38a6727f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1692386714}
+--- !u!114 &1030172697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030172694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d722f838fb39544aae9de94b555acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1308172934
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,14 +149,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308172934}
-  m_LocalRotation: {x: 0.54336375, y: -0.059702504, z: 0.37799764, w: 0.74720097}
+  m_LocalRotation: {x: 0.5000001, y: -0.4999999, z: 0.7071068, w: 0.0000001192093}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.0881248, y: 5.0881276, z: 5.0881276}
+  m_LocalScale: {x: 5.8000956, y: 5.8000975, z: 5.8000975}
   m_Children:
   - {fileID: 1439816389}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 58.997, y: 38.63, z: 76.09901}
+  m_LocalEulerAnglesHint: {x: 45, y: 90, z: 225}
 --- !u!1 &1439816388
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +276,19 @@ Prefab:
     - target: {fileID: 4921016547831940, guid: 2a59828eea982a34dbf9cd2e38a6727f, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028791855414950, guid: 2a59828eea982a34dbf9cd2e38a6727f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379293483205106, guid: 2a59828eea982a34dbf9cd2e38a6727f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114479823804033844, guid: 2a59828eea982a34dbf9cd2e38a6727f,
+        type: 2}
+      propertyPath: speed
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a59828eea982a34dbf9cd2e38a6727f, type: 2}
