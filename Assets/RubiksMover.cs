@@ -10,17 +10,18 @@ public class RubiksMover : MonoBehaviour {
     {
         rubiksBehaviour = GetComponent<RubiksBehaviour>();
     }
-    string s = "abcdefghijklmnopqr";
+    public string s = "abcdefghijklmnopqr";
     int index = 0;
     int frames =0;
 
     void Update ()
     {
-        if (frames++ % 2 == 0)
+        if (index >= s.Length)
+            return;
+        if (frames++ % 20 == 0)
         {
             move(s[index]);
             index++;
-            index %= s.Length;
         }
     }
 
