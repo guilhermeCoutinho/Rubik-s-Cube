@@ -7,4 +7,4 @@ This rubiks cube project is a demo with the cube face-rotation logic and some he
 <li>Scrambler</li>
 <li>Camera pivot rotator</li>
 
-[demo] https://i.imgur.com/WiHUZZI.gif
+![demo] (http://i.imgur.com/WiHUZZI.gif)
